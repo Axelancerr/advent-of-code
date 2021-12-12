@@ -9,9 +9,7 @@
                     [__import__("collections").Counter([j[i] for j in x]).most_common()[0][0] for i in range(12)],
                     [__import__("collections").Counter([j[i] for j in x]).most_common()[-1][0] for i in range(12)],
                 ]
-
             )
-
         )
 )(
     list(map(list, map(str.strip, open("input.txt").readlines())))
