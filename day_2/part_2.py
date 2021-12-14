@@ -3,20 +3,22 @@
         print(x[0]["horizontal"] * x[0]["depth"])
 )(
     (
-        lambda y:
+        commands := {"aim": 0, "horizontal": 0, "depth": 0},
+        [
             (
-                y,
-                [
-                    (
-                        y.__setitem__("horizontal", y["horizontal"] + int(command[1])),
-                        y.__setitem__("depth", y["depth"] + (y["aim"] * int(command[1])))
-                    ) if command[0] == "forward"
-                    else (y.__setitem__("aim", y["aim"] + int(command[1]))) if command[0] == "down"
-                    else (y.__setitem__("aim", y["aim"] - int(command[1]))) if command[0] == "up" else None
-                    for command in list(map(str.split, open("input.txt").readlines()))
-                ]
+                commands.__setitem__("horizontal", commands["horizontal"] + int(amount)),
+                commands.__setitem__("depth", commands["depth"] + (commands["aim"] * int(amount)))
+            ) if command == "forward"
+            else (
+                commands.__setitem__("aim", commands["aim"] + int(amount))
+            ) if command == "down"
+            else (
+                commands.__setitem__("aim", commands["aim"] - int(amount))
+            ) if command == "up"
+            else (
+                None
             )
-    )(
-        {"aim": 0, "horizontal": 0, "depth": 0}
+            for command, amount in list(map(str.split, open("input.txt").readlines()))
+        ]
     )
 )
